@@ -7,6 +7,7 @@ export default function AddPage(){
     return (
         <main>
             This is the ADD page.
+            hello
         </main>
     );
 }
