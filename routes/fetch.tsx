@@ -3,8 +3,31 @@
 /** @jsx h */
 import {h} from "preact";
 import {tw} from "@twind";
+import {Handlers, PageProps} from "$fresh/server.ts";
 
-export default function Page(){
+interface Qna{
+    category: string;
+    question: string;
+    answer: string;
+}
+
+export const handler: Handlers<Qna | null> = {
+    async GET(_,ctx){
+        const url = `https://web-projects-cba0b-default-rtdb.firebaseio.com/qna/gerZIy0RY6WYkDdVMEtmWRDUSMc2/qna.json`;
+        const resp = await fetch(url);
+        if(resp.status === 404){
+            return ctx.render(null);
+        }
+        const qna: Qna = await resp.json();
+        console.log(qna);
+        return ctx.render(qna);
+    },
+};
+
+export default function Page({data}: PageProps<Qna | null>){
+    if(!data){
+        return <h1>No QnA found..</h1>
+    }
     return (
         <main class={tw`p-4`}>
             <div class={tw`border-2 rounded-lg border-gray-500 sticky top-4 bg-white`}>
@@ -29,7 +52,7 @@ export default function Page(){
                 <div class={tw`shadow-md p-2 bg-gray-100 border-l-slate-700 border-2 mb-5`}>                    
                     <div class={tw`flex items-center mb-2`}>
                         <small class={tw`mr-2`}><b>Category:</b></small>
-                        <span>Category name</span>
+                        <span>{data}</span>
                     </div>
                     <div class={tw`grid grid-flow-row mb-2`}>
                         <small><b>Q No. #</b></small>
