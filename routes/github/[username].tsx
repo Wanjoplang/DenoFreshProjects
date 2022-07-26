@@ -26,9 +26,10 @@ export default function Page({data}: PageProps<User | null>){
     if(!data){
         return <h1>User not found</h1>
     }
-
+    const r = JSON.stringify(data);
     return (
         <div>
+            {r}
             <img src={data.avatar_url} width={64} height={64} />
             <h1>{data.name}</h1>
             <p>{data.login}</p>
