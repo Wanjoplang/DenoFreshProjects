@@ -6,7 +6,7 @@ import {tw} from "@twind";
 
 export default function Page(){
     return (
-        <main>
+        <main class={tw`p-4`}>
             <div class={tw`border-2 rounded-lg border-gray-500`}>
                 <div class={tw`flex items-center bg-gray-200 rounded-t-lg`}>
                     <span class={tw`mx-2 font-semibold text-sm`}>Category</span>
