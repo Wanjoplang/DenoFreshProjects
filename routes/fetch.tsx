@@ -7,7 +7,7 @@ import {tw} from "@twind";
 export default function Page(){
     return (
         <main class={tw`p-4`}>
-            <div class={tw`border-2 rounded-lg border-gray-500`}>
+            <div class={tw`border-2 rounded-lg border-gray-500 sticky top-4 bg-white`}>
                 <div class={tw`flex items-center bg-gray-200 rounded-t-lg`}>
                     <span class={tw`mx-2 font-semibold text-sm`}>Category</span>
                     <select class={tw`w-full bg-gray-300 p-2 outline-none rounded-tr-lg`} id="view_categories">
