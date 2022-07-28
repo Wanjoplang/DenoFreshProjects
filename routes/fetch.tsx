@@ -13,7 +13,7 @@ interface Qna{
 
 export const handler: Handlers<Qna | null> = {
     async GET(_,ctx){
-        const url = `https://web-projects-cba0b-default-rtdb.firebaseio.com/qna/gerZIy0RY6WYkDdVMEtmWRDUSMc2/qna/1.json`;
+        const url = `https://web-projects-cba0b-default-rtdb.firebaseio.com/qna/gerZIy0RY6WYkDdVMEtmWRDUSMc2/qna.json`;
         const resp = await fetch(url);
         if(resp.status === 404){
             return ctx.render(null);
@@ -27,8 +27,16 @@ export default function Page({data}: PageProps<Qna | null>){
     if(!data){
         return <h1>No QnA found..</h1>
     }
+    const r = JSON.stringify(data);
+    const tmp = JSON.parse(r);
+    const dta = [];
+    for(let t in tmp){
+        dta.push(tmp[t]);
+    }
+
     return (
         <main class={tw`p-4`}>
+            {JSON.stringify(dta)}
             <div class={tw`border-2 rounded-lg border-gray-500 sticky top-4 bg-white`}>
                 <div class={tw`flex items-center bg-gray-200 rounded-t-lg`}>
                     <span class={tw`mx-2 font-semibold text-sm`}>Category</span>
@@ -47,7 +55,12 @@ export default function Page({data}: PageProps<Qna | null>){
                 </div>
             </div>
             <h1 class={tw`text-xl my-4 text-gray-600 font-semibold`}>List of QnAs</h1>
-            <div id="content">
+            <div id="content">                
+                {
+                    dta.map((value,index)=>{
+                        <li>{JSON.stringify(value)}</li>
+                    })
+                }
                 <div class={tw`shadow-md p-2 bg-gray-100 border-l-slate-700 border-2 mb-5`}>                    
                     <div class={tw`flex items-center mb-2`}>
                         <small class={tw`mr-2`}><b>Category:</b></small>
